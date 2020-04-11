@@ -1,0 +1,15 @@
+##hangman images
+##6 guesses left
+emptyhanger='  -----\n  |   |\n      |\n      |\n      |\n      |\n  ====='
+##5 guesses left
+fivehanger='  -----\n  |   |\n  0   |\n      |\n      |\n      |\n  ====='
+##4 guesses left
+fourhanger='  -----\n  |   |\n  0   |\n /    |\n      |\n      |\n  ====='
+##3 guesses left
+threehanger='  -----\n  |   |\n  0   |\n /|   |\n      |\n      |\n  ====='
+##2 guesses left
+twohanger='  -----\n  |   |\n  0   |\n /|\  |\n      |\n      |\n  ====='
+##1 guess left
+onehanger='  -----\n  |   |\n  0   |\n /|\  |\n / \  |\n      |\n  ====='
+##no guesses left
+fullhanger='  -----\n  |   |\n  0   |\n /|\  |\n / \  |\n      |\n  ====='
