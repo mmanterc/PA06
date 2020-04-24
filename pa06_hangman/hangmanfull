@@ -1,0 +1,176 @@
+def gallows(guesses_left):
+    ##hangman images
+    ##6 guesses left
+    emptyhanger='  -----\n  |   |\n      |\n      |\n      |\n      |\n  ====='
+    ##5 guesses left
+    fivehanger='  -----\n  |   |\n  0   |\n      |\n      |\n      |\n  ====='
+    ##4 guesses left
+    fourhanger='  -----\n  |   |\n  0   |\n /    |\n      |\n      |\n  ====='
+    ##3 guesses left
+    threehanger='  -----\n  |   |\n  0   |\n /|   |\n      |\n      |\n  ====='
+    ##2 guesses left
+    twohanger='  -----\n  |   |\n  0   |\n /|\  |\n      |\n      |\n  ====='
+    ##1 guess left
+    onehanger='  -----\n  |   |\n  0   |\n /|\  |\n / \  |\n      |\n  ====='
+    ##no guesses left
+    fullhanger='  -----\n  |   |\n  0   |\n /|\  |\n / \  |\n      |\n  ====='
+​
+    if guesses_left==6:
+        print (emptyhanger)
+    elif guesses_left==5:
+        print (fivehanger)
+    elif guesses_left==4:
+        print (fourhanger)
+    elif guesses_left==3:
+        print (threehanger)
+    elif guesses_left==2:
+        print (twohanger)
+    elif guesses_left==1:
+        print (onehanger)
+    else:
+        print (fullhanger)
+    
+​
+import random
+​
+## generate random word
+def generate_random_word():
+    words = "acres adult advice arrangement attempt august autumn border breeze brick calm canal cast chose claws".split()
+    word = random.choice(words)
+    return word
+​
+## print guessed word
+def print_word(word,guessed_letter,displayed):
+    displayed = list(displayed)
+    something = list(word)
+    for i in range(0,len(word)):
+        if something[i] == guessed_letter:
+            displayed[i] = something[i]
+    displayed = "".join(displayed)
+    print(displayed)
+    return displayed
+​
+## play game
+def play_hangman():
+    want_to_play = True
+    while (want_to_play):
+        word = generate_random_word()
+        displayed = "-"*len(word)
+        guessed_letters = []
+        guesses_left = 6
+        letter = input("Enter a letter to guess: ")
+        done = False
+        while not done:
+            if letter in guessed_letters:
+                ## subtract one from guesses_left
+                guesses_left = guesses_left-1
+                print("You already guessed that letter")
+            elif letter not in word:
+                ## add letter to guessed letters 
+                guessed_letters.append(letter)
+                ## tell user the letter is not in the word 
+                print(letter,"is not in the word")
+                ## subtract one from the guesses_left
+                guesses_left = guesses_left-1
+            else:
+                ## add letter to guessed letters 
+                guessed_letters.append(letter)
+                ## tell user the letter is in the word
+                print(letter,"is in the word")
+            
+            if "-" not in displayed:
+                ## set done to be true and tell the user they won!
+                done = True
+                print("You won!")
+            elif guesses_left == 0:
+                ## set done to be true and tell the user they lost!
+                done = True
+                print("You lost!")
+            else:
+                ## print the word with a dash for each letter not in guessed_letters
+                displayed = print_word(word, letter, displayed)
+                gallows(guesses_left)
+                letter = input("Enter a letter to guess: ")
+            
+​
+        want_to_play = input("Do you want to play again?: ")
+        if want_to_play.lower() == "yes":
+            want_to_play = True
+        else:
+            want_to_play = False
+play_hangman()
+Enter a letter to guess:  a
+a is in the word
+a----
+  -----
+  |   |
+      |
+      |
+      |
+      |
+  =====
+Enter a letter to guess:  b
+b is not in the word
+a----
+  -----
+  |   |
+  0   |
+      |
+      |
+      |
+  =====
+Enter a letter to guess:  o
+o is not in the word
+a----
+  -----
+  |   |
+  0   |
+ /    |
+      |
+      |
+  =====
+Enter a letter to guess:  p
+p is not in the word
+a----
+  -----
+  |   |
+  0   |
+ /|   |
+      |
+      |
+  =====
+Enter a letter to guess:  m
+m is not in the word
+a----
+  -----
+  |   |
+  0   |
+ /|\  |
+      |
+      |
+  =====
+Enter a letter to guess:  b
+You already guessed that letter
+a----
+  -----
+  |   |
+  0   |
+ /|\  |
+ / \  |
+      |
+  =====
+Enter a letter to guess:  f
+f is not in the word
+You lost!
+Do you want to play again?:  yes
+Enter a letter to guess:  n
+n is not in the word
+-----
+  -----
+  |   |
+  0   |
+      |
+      |
+      |
+  =====
+Enter a letter to guess: 
